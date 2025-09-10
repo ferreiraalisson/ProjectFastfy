@@ -24,10 +24,10 @@ Comando no cmd para configurar o projeto
 //executa o prisma
 - npx prisma studio
 
-- No código
-- Edição do package-json
-- alteração no schema.prisma para criar modelos do banco 
-- criação de arquivos routes, server, db e app
+// No código:
+Edição do package-json
+alteração no schema.prisma para criar modelos do banco 
+criação de arquivos routes, server, db e app
 
 //executar o projeto
 - npm run dev
