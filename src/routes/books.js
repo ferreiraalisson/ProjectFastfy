@@ -28,9 +28,34 @@ app.post('/books', { schema: { body: bookBodySchema}}, async (req, reply) => {
 
 //READ
 app.get('/books',async (req, reply)=> {
-    const books = await app.prisma.findMay({
+    const books = await app.prisma.book.findMany({
         orderBy: {id: 'asc'}
     });
     return reply.send(books);
+});
+
+//UPDATE
+
+app.put('/books/:id', { schema: { body: bookBodySchema, params: idParamSchema}}, async (req, reply) => {
+    const {title, author } = req.body;
+    let { id } = req.params;
+
+    const book = await app.prisma.book.update({
+        where: { id: Number(id) },
+        data: { title, author }
+    });
+
+    return reply.send(book);
 })
+
+// DELETE
+
+app.delete('/books/:id', {schema: { body: bookBodySchema, params: idParamSchema}}, async (req, reply) => {
+    let { id } = req.params;
+    const book = await app.prisma.book.delete({
+        where: {id: Number(id)}
+    });
+    return reply.send(book)
+})
+
 }
